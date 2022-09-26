@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="container">
+  <div class="score-block">
+    <div class="score-title">
+      <img class="logo" src="assets/images/score.png" width="24" alt="score" />
+      <h2>Le Quiz est terminé</h2>
+    </div>
+    <div class="score">
+      {{ score }}
+      <h2>réponses justes</h2>
+    </div>
+    <div *ngIf="newBestScore" class="bestScore">
+      <p>Meilleur score {{ score }}</p>
+      <div class="badge">New !</div>
+    </div>
+  </div>
+  <div *ngIf="answers$ | async as answers">
+    <h2>Détail des résultats :</h2>
+    <br />
+    <p *ngFor="let answer of answers">
+      {{ answer.label }}
+      <span [style.color]="answer.isCorrect ? 'lightgreen' : 'red'">{{
+        answer.isCorrect ? "&#10004;" : "&#10006;"
+      }}</span>
+    </p>
+  </div>
+</div>

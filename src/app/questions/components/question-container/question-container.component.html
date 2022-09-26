@@ -1,0 +1,13 @@
+<div *ngIf="questions.length > 0">
+  <app-header
+    [title]="'Question ' + (questionIndex + 1) + '/' + questions.length"
+    [showTitle]="true"
+    [showTimer]="true"
+  ></app-header>
+  <div class="container">
+    <app-question-form
+      [question]="questions[questionIndex]"
+      (onChoiceMade)="onChoiceMade($event)"
+    ></app-question-form>
+  </div>
+</div>

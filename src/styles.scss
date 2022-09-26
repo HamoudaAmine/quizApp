@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Inter";
+  src: local("Inter"), url(/assets/fonts/inter_font.ttf) format("truetype");
+}
+@import "~@angular/material/theming";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+$custom-typography: mat-typography-config(
+  $font-family: "Inter",
+);
+
+@include mat-core($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  color: #16175f;
+}
+
+.btn-custom {
+  padding: 0px;
+  width: 126px;
+  height: 42px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 0 !important;
+  font-weight: 600 !important;
+  font-size: 24px !important;
+  line-height: 130% !important;
+}

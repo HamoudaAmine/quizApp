@@ -1,0 +1,52 @@
+<div class="container">
+  <label id="question-radio-label" class="question-label">{{
+    question?.label
+  }}</label>
+  <form [formGroup]="form">
+    <mat-radio-group
+      *ngIf="question?.answerType == 'choice'"
+      aria-labelledby="question-radio-label"
+      labelPosition="before"
+      class="choice-grid"
+      formControlName="choice"
+    >
+      <mat-radio-button
+        class="choice-item"
+        *ngFor="let choiceValue of question.choices"
+        [value]="choiceValue"
+      >
+        {{ choiceValue }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div class="choice-grid" *ngIf="question?.answerType == 'multiple-choice'">
+      <div *ngFor="let choiceValue of question.choices">
+        <mat-checkbox
+          labelPosition="before"
+          class="choice-item"
+          [value]="choiceValue"
+          (change)="onChange($event)"
+          >{{ choiceValue }}</mat-checkbox
+        >
+      </div>
+    </div>
+
+    <mat-form-field
+      class="input-answer"
+      appearance="outline"
+      *ngIf="question?.answerType == 'text'"
+    >
+      <mat-label>Votre réponse</mat-label>
+      <input matInput formControlName="choice" />
+    </mat-form-field>
+  </form>
+
+  <button
+    class="btn-custom"
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+  >
+    valider
+  </button>
+</div>

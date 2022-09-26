@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 80px;
+  max-width: 1232px;
+  min-height: 493px;
+  gap: 48px;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 24px;
+  gap: 24px;
+}
+
+.question-label {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 130%;
+  padding: 16px 24px;
+  align-self: flex-start;
+}
+
+.choice-item {
+  display: flex;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 16px;
+  width: 526px;
+  height: 58px;
+  background: #e1f1ff;
+  border-radius: 8px;
+}
+
+::ng-deep {
+  .mat-radio-label {
+    justify-content: space-between;
+  }
+  .mat-checkbox-layout {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .mat-checkbox-inner-container {
+    margin-right: 0 !important;
+  }
+}
+.input-answer {
+  width: 807px;
+  height: 56px;
+}

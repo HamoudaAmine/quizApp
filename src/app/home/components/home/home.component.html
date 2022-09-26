@@ -1,0 +1,40 @@
+<div>
+  <div class="home-top">
+    <img
+      class="logo"
+      src="assets/images/angular_logo.png"
+      width="78"
+      alt="logo"
+    />
+  </div>
+  <div class="start-block">
+    <div class="text-block">
+      <ng-container *ngIf="quiz$ | async as quiz">
+        <p class="questions-length">{{ quiz.length }} questions</p>
+      </ng-container>
+      <h1 class="home-title">Mon test technique</h1>
+    </div>
+    <button
+      class="btn-custom"
+      mat-raised-button
+      color="primary"
+      [disabled]="!dataLoaded"
+      routerLink="/questions"
+    >
+      Démarrer
+    </button>
+  </div>
+  <div class="home-bottom">
+    <div *ngIf="!dataLoaded" class="loader"></div>
+    <div class="best-score">
+      <img
+        class="logo"
+        src="assets/images/trophy.png"
+        width="19"
+        alt="trophy"
+      />
+      <h4 class="score-label">Meilleur score</h4>
+      <h2>{{ bestScore || "-/-" }}</h2>
+    </div>
+  </div>
+</div>
