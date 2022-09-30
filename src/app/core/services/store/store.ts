@@ -18,15 +18,16 @@ export class StoreService {
   }
 
   private readonly subject = new BehaviorSubject<State>(state);
-  private readonly store = this.subject
-    .asObservable()
-    .pipe(distinctUntilChanged());
+  private readonly store = this.subject.asObservable();
 
-  select<T>(name: keyof State): Observable<T> {
-    return this.store.pipe(pluck<State, T>(name), distinctUntilChanged());
+  select<T extends keyof State>(name: T): Observable<State[T]> {
+    return this.store.pipe(
+      pluck<State, State[typeof name]>(name),
+      distinctUntilChanged()
+    );
   }
 
-  set(name: keyof State, value: any) {
+  set<T extends keyof State>(name: T, value: State[T]) {
     this.subject.next({ ...this.storeValue, [name]: value });
   }
 }
