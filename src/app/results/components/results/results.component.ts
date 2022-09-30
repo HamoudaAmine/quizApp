@@ -27,8 +27,8 @@ export class ResultsComponent implements OnInit {
   getScore() {
     this.store.select('score').subscribe((score) => {
       this.score = score as string;
-      const bestScore = this.localStorageService.getBestScore();
-      if (Number(bestScore?.charAt(0)) || 0 < Number(this.score?.charAt(0))) {
+      const bestScore = this.localStorageService.getBestScore() ?? '0';
+      if (Number(bestScore?.charAt(0)) < Number(this.score?.charAt(0))) {
         this.localStorageService.setNewBestScore(this.score);
         this.newBestScore = true;
       }

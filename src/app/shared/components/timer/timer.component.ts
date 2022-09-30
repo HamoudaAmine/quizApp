@@ -21,7 +21,7 @@ export class TimerComponent implements OnInit {
   }
 
   startTimer$() {
-    this.timer$ = timer(1000, QUIZ_TIME_STEP).pipe(
+    this.timer$ = timer(0, QUIZ_TIME_STEP).pipe(
       map((second) => {
         let counter = QUIZ_TIME - second;
         if (counter == 0) {

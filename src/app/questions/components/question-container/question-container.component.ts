@@ -4,6 +4,7 @@ import { Answer } from '@core/models/answer.model';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Quiz } from '@core/models/quiz.model';
+import { filter } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-question-container',
@@ -30,23 +31,24 @@ export class QuestionContainerComponent implements OnInit {
 
   getQuiz() {
     this.store.select('questions').subscribe((questions) => {
-      this.questions = questions as Quiz[];
+      this.questions = questions;
     });
   }
 
   getTimeUp() {
     this.store
       .select('timeUp')
-      .subscribe((status) => (this.timeUp = status as boolean));
+      .pipe(filter((status) => status))
+      .subscribe(() => {
+        this.goToResults();
+      });
   }
 
   onChoiceMade(choice: string | string[]) {
     if (choice == '' || choice.length == 0) return;
     this.checkAnswer(choice);
-    if (this.timeUp || this.questionIndex + 1 == this.questions.length) {
-      this.store.set('ansewers', this.answers);
-      this.store.set('score', `${this.correctAnswer}/${this.questions.length}`);
-      this.router.navigate(['results']);
+    if (this.questionIndex + 1 == this.questions.length) {
+      this.goToResults();
       return;
     }
     this.questionIndex++;
@@ -75,5 +77,11 @@ export class QuestionContainerComponent implements OnInit {
         this.answers.push({ label: currentQuestion.label, isCorrect: false });
       }
     }
+  }
+
+  goToResults() {
+    this.store.set('ansewers', this.answers);
+    this.store.set('score', `${this.correctAnswer}/${this.questions.length}`);
+    this.router.navigate(['results']);
   }
 }
